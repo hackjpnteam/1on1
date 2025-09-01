@@ -2,14 +2,31 @@
 import useSWR from "swr";
 import { format } from "date-fns";
 import Link from "next/link";
+import React from "react";
 
 const fetcher = (url: string) => fetch(url).then(r => r.json());
 
 export default function TimelinePage() {
-  const { data: sessions } = useSWR("/api/sessions", fetcher);
+  const { data: sessions, mutate } = useSWR("/api/sessions", fetcher);
+  
+  // ページが表示されるたびにデータを再取得
+  React.useEffect(() => {
+    mutate();
+  }, [mutate]);
+  
+  console.log("Timeline sessions data:", sessions);
+  
   return (
     <div className="space-y-4">
       <h1 className="text-xl font-semibold">タイムライン</h1>
+      
+      {!sessions && <div>セッションを読み込み中...</div>}
+      {sessions && sessions.length === 0 && (
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+          <p className="text-yellow-800">まだ予約されたセッションがありません。</p>
+        </div>
+      )}
+      
       <ul className="space-y-3">
         {sessions?.map((s: any) => (
           <li key={s._id} className="bg-white rounded-2xl shadow-soft p-4 hover:shadow-lg transition-shadow">

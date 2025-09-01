@@ -104,9 +104,13 @@ export default function SchedulePage() {
       });
       
       if (sessionRes.ok) {
+        const sessionData = await sessionRes.json();
+        console.log("Created session data:", sessionData);
         alert("1on1を予約しました");
         router.push("/timeline");
       } else {
+        const errorData = await sessionRes.json();
+        console.error("Session creation failed:", errorData);
         alert("予約に失敗しました");
       }
     } catch (error) {
