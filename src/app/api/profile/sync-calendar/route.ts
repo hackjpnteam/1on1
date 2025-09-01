@@ -6,7 +6,7 @@ import { google } from "googleapis";
 const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  `${process.env.NEXTAUTH_URL}/api/calendar/callback`
+  `${process.env.NEXTAUTH_URL?.replace(/\/$/, '')}/api/calendar/callback`
 );
 
 export async function POST(req: NextRequest) {
