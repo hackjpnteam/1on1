@@ -85,7 +85,7 @@ async function syncAvailability(userId: string, auth: any) {
         let currentTime = dayStart;
         
         for (const busySlot of dayBusySlots) {
-          const busyStart = new Date(busySlot.start);
+          const busyStart = new Date(busySlot.start || "");
           
           if (currentTime < busyStart && (busyStart.getTime() - currentTime.getTime()) >= 60 * 60 * 1000) {
             availableSlots.push({
@@ -95,7 +95,7 @@ async function syncAvailability(userId: string, auth: any) {
             });
           }
           
-          currentTime = new Date(busySlot.end);
+          currentTime = new Date(busySlot.end || "");
         }
         
         if (currentTime < dayEnd && (dayEnd.getTime() - currentTime.getTime()) >= 60 * 60 * 1000) {

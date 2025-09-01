@@ -4,12 +4,13 @@ import User from "@/models/User";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await dbConnect();
     
-    const user = await User.findById(params.id);
+    const { id } = await params;
+    const user = await User.findById(id);
     
     if (!user) {
       return NextResponse.json(
@@ -26,7 +27,7 @@ export async function GET(
     }
 
     // 今週と来週の利用可能な時間スロットを生成
-    const slots = [];
+    const slots: any[] = [];
     const today = new Date();
     const nextWeek = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
 

@@ -50,7 +50,7 @@ export const authOptions = {
     signIn: "/login",
   },
   events: {
-    async linkAccount({ user, account, profile }) {
+    async linkAccount({ user, account, profile }: any) {
       console.log("Account linked:", { user, account, profile });
     },
   },

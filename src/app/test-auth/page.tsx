@@ -54,12 +54,12 @@ export default function TestAuthPage() {
 
       <div className="mt-8">
         <h2 className="text-lg font-semibold mb-2">Direct Link Test:</h2>
-        <a 
-          href="/api/auth/signin/google" 
-          className="text-blue-600 underline"
+        <button
+          onClick={() => window.location.href = "/api/auth/signin/google"}
+          className="text-blue-600 underline cursor-pointer bg-transparent border-none p-0"
         >
           Direct Google Sign In Link
-        </a>
+        </button>
       </div>
     </div>
   );

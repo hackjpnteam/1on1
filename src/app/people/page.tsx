@@ -28,14 +28,14 @@ export default function PeoplePage() {
   });
 
   // 部署一覧
-  const departments = [...new Set(users?.map((u: any) => u.department).filter(Boolean))];
+  const departments = [...new Set(users?.map((u: any) => u.department).filter(Boolean))] as string[];
   
   // 専門分野一覧（全ユーザーの専門分野を集約）
   const allExpertise = [...new Set(
     bookableUsers
       ?.flatMap((u: any) => u.expertise || [])
       .filter(Boolean)
-  )];
+  )] as string[];
 
   // 各人物の統計情報を取得
   const getUserStats = (userId: string) => {

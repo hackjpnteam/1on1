@@ -43,7 +43,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                   </>
                 ) : (
                   <>
-                    <Link href="/profile" className="text-gray-600 hover:underline">{session.user?.name || session.user?.email}</Link>
+                    <Link href="/profile" className="text-gray-600 hover:underline">{(session as any).user?.name || (session as any).user?.email}</Link>
                     <Link href="/api/auth/signout" className="text-orange-700 hover:text-orange-800 hover:underline transition-colors">ログアウト</Link>
                   </>
                 )}
